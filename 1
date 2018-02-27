@@ -1,0 +1,203 @@
+#
+
+React is js library to build user interfaces.
+It is not a framework.
+It is small and not a complete solution.
+Use more libraries with react to form solution.
+It focuses only on one thing "Building user interfaces".
+
+If device we are interfacing can understand JS , we can use react to describe user interface.
+
+We desrcibe interface and react with its Dom library for browsers will build the actual interface
+on our behalf.
+Description of UI => Actual UI
+React dom library carries out this conversion , w/o this we would need other tools to build UI.
+
+#Declarative
+We tell it "what" we want and not "how" to do it.
+Description of UI is given in reactJS and we tell it what we want ,not how.
+React takes care of "how".
+
+With react we get to be declarative for html interfaces that represent dynamic data.
+
+#
+
+Three main design concepts.
+
+1.Components
+In react , UI is described using components.
+You can Think of it as a simple function.
+Give input and take output , reuse and build bigger function using smaller.
+Components are reusable , and bigger components can be built with help of smaller.
+
+We call their input properties and state and
+component output is description of user interface.
+
+properties + state => output UI
+
+Reusable/composable
+We can use single component in multiple UI and component can contain other components.
+
+React component can have private state , that hold data that may change over time.
+
+2.ReactiveUpdates
+Nature is reactive
+when state of component (input),changes ,the user interface (output) also changes ,just like function.
+
+Take these changes to browser by automatically updating the dom.
+In react we dont need to worry about how to update it and even manage when to take
+changesto browser.
+
+React reacts to state changes.
+
+3.VirtualViews
+With react we write html in javascript.
+
+we rely on power of js to generate html that depends on some data
+,rather than enhancing html to make it work with that data.
+
+Most of the other frameworks enhance html.
+Angular
+
+when we recieve data from backend via ajax , we need more than html to work with that data.
+1.Use enhanced html or
+2.use power of javascript to generate html.
+
+React uses power js.
+
+Use of js to render html allows react to have virtual representation of html in memory. called
+"VirtualDom"
+
+React uses this concept to generate HTML tree virtually first.
+then everytime state changes , and we have new HTML tree to be written back to browsers DOM ,
+instead of writing whole dom tree, react only writes difference between old
+and new dom tree as it have both trees in memory, called
+"TreeReconcilation"
+
+#
+Components
+Two types of components
+Function and class component / Stateless and stateful
+Functional component associated with presentational concept.
+
+1.Function component (stateless)
+simplest form of react component.
+simple contract.
+receives object of properties (props)
+returns JSX.
+
+2.Class component (stateful)
+recieves props but also considers private internal data i.e state. while generating JSX.
+This state gives reactive nature.
+When state changes , react re renders that component.
+
+Class Component can  only change their state and cannot change prop.
+Props are fixed values.
+State can be changed.
+
+JSX is used to describe dom.(in html way but slightly different)
+it is optional , jsx is compiled to react js and then used.
+React can be used without JSX.
+
+With JSX means we write dom in html like format and it is converted to react js while compiling
+Without JSX , we have to write dom in react js syntax which is little bit tougher.
+
+JSX is html but little bit different
+class => className
+
+JSX converts internally
+dom => js representation of dom
+
+Dom description using react js is little bit difficult to understand when nested deeply.
+JSx is like simple html code.
+JSX makes maintanance of dom easy.
+
+Props of component are immutable.
+#
+#
+const for function components
+const only have return
+
+Using functional component is like calling function.
+Its parameters are sent as props to component
+
+Component upper case , html lower case to distinguish.
+This is react component : <MyButton/>
+This is html : <button>
+
+return ( X )
+X could be jsx or react dom description.
+It could also be another react component
+
+Class component extends from React.Component
+render() function returns class components JSX.
+State is saved in this.state
+
+state can be initialized in constructor and set to this.state
+  constructor(props){
+    this.state = {counter:0}
+  }
+
+OR it can be simply written as hash like  state = {a:2,b:3}
+
+#
+
+React comes with normalized events that are easy to use
+In return
+<MyButton onClick = {this.functionName}></MyButton>
+
+"functionName" is defined as instance function of class
+
+To update state there is setter for state
+this.setState({})
+
+Multiple event call function on component.
+To avoid race condition , "prevState" is passed which holds previous state object.
+#
+
+Component structure
+how many to use and what should each describe.
+
+Use function components when you dont want to manage state.
+They have advantages over class level.
+Golden rule
+
+Use class only when you want to manage state object ,
+which is usually done on top level.
+
+spread operator
+(card) => {<Card name={card.name}> age={card.age}/>}
+(card) => {<Card {...card}/>}
+
+
+Combine two components by keeping them inside one empty component.
+
+
+
+Referencing dom element in event function
+It is normally done by javascript using getElementById
+but react has its own way to do it.
+
+ref={(input)=>this.userNameInput=input}
+
+This gives reference to whole UI element.
+
+If you dont want entire UI element but only value of it.
+Define state variable to hold its value.
+in onchange write that value to state variable
+and simply access this state variable in event function
+
+
+Parent can pass primitive values or function references to child component.
+
+
+onClick needs function reference and not function call.
+() => fn(1) is different from fn(1)
+
+use arrow functions
+
+
+#
+Top element have state and functions
+it passes state variables and function references to children
+children calls this functions , function changes state and re renders.
